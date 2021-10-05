@@ -24,6 +24,15 @@ class UserController extends BaseController{
         $user= $this->userModel->findById($columns, $id);
         return $this->view('frontend.users.show', ['user'=> $user]);
     }
+
+    public function store(){
+        $data=[
+            'username'=> 'alo alo',
+            'password'=> '123123',
+            'level'=> 0
+        ];   
+        return $this->userModel->store($data);
+    }
 }
 
 ?>

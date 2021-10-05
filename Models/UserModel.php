@@ -11,6 +11,9 @@ class UserModel extends BaseModel{
         return $this->getById(self::TABLE, $select, $id);
     }
 
+    public function store($data){
+        return $this->create(self::TABLE, $data);
+    }
     public function delete(){
         return __METHOD__;
     }

@@ -37,8 +37,17 @@ class BaseModel extends Database{
 
     }
 
-    public function store(){
+    public function create($table, $data=[]){
 
+        $columns= implode(',', array_keys($data));
+        $values= implode(',', array_values($data));
+        $newValues= array_map(function($values){
+            return "'" . $values . "'";
+        }, array_values($data));
+        $newValues= implode(',', array_values($newValues));
+        $sql= "INSERT INTO ${table}(${columns}) VALUES (${newValues})";
+        
+        return $this->_query($sql);
     }
 
     public function update(){
