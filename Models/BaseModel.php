@@ -28,7 +28,12 @@ class BaseModel extends Database{
         return $data;
     }
 
-    public function findById($id){
+    public function getById($table, $select= ['*'], $id){
+
+        $columns= implode(',', $select);
+        $sql= "SELECT ${columns} FROM ${table} WHERE id= ${id} LIMIT 1";
+        $query= $this->_query($sql);
+        return mysqli_fetch_assoc($query);
 
     }
 

@@ -16,11 +16,13 @@ class UserController extends BaseController{
         $users = $this->userModel->getAll($columns, $orderBys , $limit);
 
         // return include './Views/frontend/users/index.php'
-        return $this->view('frontend.users.index',['users'=>$users]);
+        return $this->view('frontend.users.index',['users'=> $users]);
     }
     public function show(){
-        echo $this->userModel->findById(12);
-        return $this->view('frontend.users.show');
+        $id= $_GET['id'];
+        $columns= ['id','username','level'];
+        $user= $this->userModel->findById($columns, $id);
+        return $this->view('frontend.users.show', ['user'=> $user]);
     }
 }
 

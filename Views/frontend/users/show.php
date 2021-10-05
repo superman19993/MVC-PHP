@@ -1,1 +1,7 @@
-<h1> this is the show site</h1>
+<h1>user: </h1>
+<?php
+    echo '<pre>';
+    print_r($user);
+
+
+?>

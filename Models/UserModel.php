@@ -7,8 +7,8 @@ class UserModel extends BaseModel{
         return $this->all(self::TABLE, $select, $orderBys, $limit);
     }
 
-    public function findById($id){
-        return __METHOD__;
+    public function findById($select=['*'], $id){
+        return $this->getById(self::TABLE, $select, $id);
     }
 
     public function delete(){
