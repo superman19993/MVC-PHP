@@ -1,4 +1,5 @@
 <?php
+
 class BaseController{
 
     const VIEW_FOLDER_NAME = 'Views';

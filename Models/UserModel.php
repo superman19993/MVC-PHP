@@ -7,15 +7,23 @@ class UserModel extends BaseModel{
         return $this->all(self::TABLE, $select, $orderBys, $limit);
     }
 
-    public function findById($select=['*'], $id){
-        return $this->getById(self::TABLE, $select, $id);
+    public function find($id){
+        return $this->getById(self::TABLE, $id);
     }
 
     public function store($data){
         return $this->create(self::TABLE, $data);
     }
-    public function delete(){
-        return __METHOD__;
+
+    public function updateData($id, $data){
+        return $this->update(self::TABLE, $id, $data);
+    }
+    public function destroy($id){
+        return $this->delete(self::TABLE, $id);
+    }
+
+    public function login($username, $password){
+        return $this->getInfo(self::TABLE, $username, $password);
     }
 }
 ?>

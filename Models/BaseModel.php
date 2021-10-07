@@ -28,13 +28,10 @@ class BaseModel extends Database{
         return $data;
     }
 
-    public function getById($table, $select= ['*'], $id){
-
-        $columns= implode(',', $select);
-        $sql= "SELECT ${columns} FROM ${table} WHERE id= ${id} LIMIT 1";
+    public function getById($table, $id){
+        $sql= "SELECT * FROM ${table} WHERE id= ${id}";
         $query= $this->_query($sql);
         return mysqli_fetch_assoc($query);
-
     }
 
     public function create($table, $data=[]){
@@ -50,14 +47,28 @@ class BaseModel extends Database{
         return $this->_query($sql);
     }
 
-    public function update(){
+    public function update($table, $id, $data){
+        $dataSets=[];
 
+        foreach ($data as $key=>$val){
+            array_push($dataSets, "${key} = '" . $val . "'");
+        }
+        $dataSetString= implode(',', $dataSets);
+        $sql= "UPDATE ${table} SET ${dataSetString} WHERE id = ${id}";
+        $this->_query($sql);
+        
     }
 
-    public function destroy(){
-
+    public function delete($table, $id){
+        $sql= "DELETE FROM ${table} WHERE id = ${id}";
+        $this->_query($sql);
     }
 
+    public function getInfo($table, $username, $password){
+        $sql= "SELECT * FROM ${table} WHERE username =" . "'${username}'" ." AND password =" ."'${password}'";
+        $result = $this->_query($sql);
+        return $user= mysqli_fetch_assoc($result);
+    }
     private function _query($sql)
     {
         return mysqli_query($this->connect, $sql);
